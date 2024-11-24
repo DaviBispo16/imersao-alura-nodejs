@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import path = require("path");
+import "dotenv/config"
 import fs from "fs";
 import generateDescriptionWithGemini from "../services/geminiService";
 import Post from "../types/Post"
@@ -44,7 +44,7 @@ export async function uploadImage(req: Request, res: Response)  {
 
 export async function updateNewPost(req: Request, res: Response) {
     const id = (req.params.id);
-    const uriImage = `http://localhost:3001/${id}.png`;
+    const uriImage = `http://localhost:${process.env.PORT}/${id}.png`;
 
     try {
         const imgBuffer = fs.readFileSync(`./uploads/${id}.png`);
